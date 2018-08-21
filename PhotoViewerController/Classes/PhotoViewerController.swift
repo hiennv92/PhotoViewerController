@@ -95,6 +95,7 @@ public class PhotoViewerController: UIViewController {
     // MARK: - Constants
     
     let dimBlackColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6)
+    var backgroundAlpha: CGFloat = 0.8
     let shortAnimationDuration: TimeInterval = 0.2
     let mediumAnimationDuration: TimeInterval = 0.3
     
@@ -153,7 +154,7 @@ public class PhotoViewerController: UIViewController {
     
     override public func viewWillAppear(_ animated: Bool) {
         contentView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.height)
-        self.view.backgroundColor = UIColor.black
+        self.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: backgroundAlpha)
         
         if cellAllocatingForTheFirstTime == false{
             setupInitial()
@@ -344,7 +345,7 @@ public class PhotoViewerController: UIViewController {
                 let proportion: CGFloat = translation / 20.0
                 
                 if proportion < 1.0{
-                    self.view.backgroundColor = UIColor.black.withAlphaComponent(1.0 - proportion)
+                    self.view.backgroundColor = UIColor.black.withAlphaComponent(self.backgroundAlpha - proportion)
                     
                 }else if proportion > 1.0{
                     self.view.backgroundColor = UIColor.clear
@@ -357,7 +358,7 @@ public class PhotoViewerController: UIViewController {
                 let width = self.view.frame.size.width
                 let height = self.view.frame.size.height
                 self.contentView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-                self.view.backgroundColor = UIColor.black
+                self.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: self.backgroundAlpha)
             }
         }
         else if state == .ended || state == .cancelled {
@@ -378,7 +379,7 @@ public class PhotoViewerController: UIViewController {
                     let width = self.contentView.frame.size.width
                     let height = self.contentView.frame.size.height
                     self.contentView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-                    self.view.backgroundColor = UIColor.black
+                    self.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: self.backgroundAlpha)
                 })
             }
         }
@@ -598,7 +599,7 @@ extension PhotoViewerController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(sender:)))
         self.view.addGestureRecognizer(pan)
         
-        self.view.backgroundColor = UIColor.black
+        self.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: self.backgroundAlpha)
         self.modalPresentationCapturesStatusBarAppearance = true
     }
     
