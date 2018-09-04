@@ -181,6 +181,10 @@ public class PhotoViewerController: UIViewController {
         
         topGuideHeight.constant = 20
         restoreIdentity()
+    }
+
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         completion?()
     }
     
