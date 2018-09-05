@@ -133,7 +133,6 @@ public class PhotoViewerController: UIViewController {
     var lastStatusBarStyle: UIStatusBarStyle?
     
     
-    
     // MARK: - Init
     
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -165,8 +164,8 @@ public class PhotoViewerController: UIViewController {
         // remember the entry status bar style
         lastStatusBarStyle = UIApplication.shared.statusBarStyle
         
-        UIApplication.shared.statusBarStyle = .lightContent
-        
+//        UIApplication.shared.statusBarStyle = .lightContent
+
         if !UIApplication.shared.isStatusBarHidden {
             topGuideHeight.constant = UIApplication.shared.statusBarFrame.size.height
         }
@@ -176,7 +175,7 @@ public class PhotoViewerController: UIViewController {
     public override func viewWillDisappear(_ animated: Bool) {
 
         if let style = lastStatusBarStyle{
-            UIApplication.shared.statusBarStyle = style
+//            UIApplication.shared.statusBarStyle = style
         }
         
         topGuideHeight.constant = 20
