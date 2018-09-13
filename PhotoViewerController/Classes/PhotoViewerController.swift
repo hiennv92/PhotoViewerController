@@ -7,7 +7,7 @@
 //
 import UIKit
 
-public protocol PhotoViewerControllerDelegate: NSObjectProtocol {
+open protocol PhotoViewerControllerDelegate: NSObjectProtocol {
     
     // MARK: - Data Source
     
@@ -103,11 +103,11 @@ open class PhotoViewerController: UIViewController {
     // MARK: - Public properties
     
     weak open var delegate: PhotoViewerControllerDelegate?
-    public var initialItemIndex: Int = 0
+    open var initialItemIndex: Int = 0
     
-    public var whenFullScreen: ((PhotoViewerController) -> Void)?
-    public var whenDetailed: ((PhotoViewerController) -> Void)?
-    public var completion: (() -> Void)?
+    open var whenFullScreen: ((PhotoViewerController) -> Void)?
+    open var whenDetailed: ((PhotoViewerController) -> Void)?
+    open var completion: (() -> Void)?
     
     // MARK: - Private properties
     
@@ -135,7 +135,7 @@ open class PhotoViewerController: UIViewController {
     
     // MARK: - Init
     
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override open init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         var bundle: Bundle?
         let podBundle = Bundle(for: PhotoViewerController.self)
         if let bundleURL = podBundle.url(forResource: "PhotoViewerController", withExtension: "bundle"){
@@ -146,12 +146,12 @@ open class PhotoViewerController: UIViewController {
         super.init(nibName: "PhotoViewerController", bundle: bundle)
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required open init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
-    override public func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         contentView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.height)
         self.view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: backgroundAlpha)
         
@@ -172,7 +172,7 @@ open class PhotoViewerController: UIViewController {
         
     }
     
-    public override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
 
         if let style = lastStatusBarStyle{
 //            UIApplication.shared.statusBarStyle = style
@@ -182,19 +182,19 @@ open class PhotoViewerController: UIViewController {
         restoreIdentity()
     }
 
-    public override func viewDidDisappear(_ animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         completion?()
     }
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         setupAll()
     }
     
     
-    override public func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         let  insets = self.collectionView.contentInset
@@ -209,7 +209,7 @@ open class PhotoViewerController: UIViewController {
     }
     
     
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
         if self.modalPresentationStyle == .overCurrentContext{
@@ -223,15 +223,15 @@ open class PhotoViewerController: UIViewController {
     }
     
     
-    override public var preferredStatusBarStyle: UIStatusBarStyle{
+    override open var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
     }
     
-    override public var prefersStatusBarHidden: Bool{
+    override open var prefersStatusBarHidden: Bool{
         return statusBarHidden
     }
 
-    public override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .fade
     }
     
@@ -311,7 +311,7 @@ open class PhotoViewerController: UIViewController {
         }
     }
     
-    public func restoreIdentity() {
+    open func restoreIdentity() {
         self.topBar.isHidden = false
         self.topGuide.isHidden = false
         
@@ -322,7 +322,7 @@ open class PhotoViewerController: UIViewController {
         }
     }
     
-    public func dismissSelf() {
+    open func dismissSelf() {
         self.dismiss(animated: true, completion: {
             self.restoreIdentity()
             self.completion?()
@@ -549,7 +549,7 @@ open class PhotoViewerController: UIViewController {
         topBar.topItem?.rightBarButtonItems = rightItems
     }
     
-    public func go(toItemAt index: Int, animated: Bool){
+    open func go(toItemAt index: Int, animated: Bool){
         collectionView.setContentOffset(CGPoint(x: CGFloat(index) * self.view.frame.size.width, y: 0), animated: animated)
         visibleIndex = index
         currentIndexPath = IndexPath.init(row: visibleIndex, section: 0)
@@ -557,12 +557,12 @@ open class PhotoViewerController: UIViewController {
     }
     
     
-    public var currentItemIndex: Int{
+    open var currentItemIndex: Int{
         return visibleIndex
     }
     
     
-    public func reloadData(){
+    open func reloadData(){
         collectionView.reloadData()
         updateSubviews(forItemAt: visibleIndex)
     }
@@ -712,7 +712,7 @@ extension PhotoViewerController {
 // MARK: - Gesture recognizer delegate
 
 extension PhotoViewerController: UIGestureRecognizerDelegate{
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
     }
 }
