@@ -79,7 +79,7 @@ public protocol PhotoViewerControllerDelegate: NSObjectProtocol {
 }
 
 
-public class PhotoViewerController: UIViewController {
+open class PhotoViewerController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var actionBar: UIView!
