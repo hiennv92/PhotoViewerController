@@ -7,7 +7,7 @@
 //
 import UIKit
 
-open protocol PhotoViewerControllerDelegate: NSObjectProtocol {
+public protocol PhotoViewerControllerDelegate: NSObjectProtocol {
     
     // MARK: - Data Source
     
@@ -135,7 +135,7 @@ open class PhotoViewerController: UIViewController {
     
     // MARK: - Init
     
-    override open init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         var bundle: Bundle?
         let podBundle = Bundle(for: PhotoViewerController.self)
         if let bundleURL = podBundle.url(forResource: "PhotoViewerController", withExtension: "bundle"){
@@ -146,7 +146,7 @@ open class PhotoViewerController: UIViewController {
         super.init(nibName: "PhotoViewerController", bundle: bundle)
     }
     
-    required open init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
